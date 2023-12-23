@@ -57,13 +57,13 @@ const Header = () => {
               >
                 Contact
               </HashLink>
-              {/* <HashLink
-                to="/#feedback"
+              <Link
+                to="/dealer"
                 class="nav-link active"
                 aria-current="page"
               >
-                Feedback
-              </HashLink> */}
+                Dealer
+              </Link>
               <Link to="/feedback" class="nav-link active" aria-current="page">
                 feedback
               </Link>

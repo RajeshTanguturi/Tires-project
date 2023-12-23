@@ -58,6 +58,41 @@ app.get("/", function (req, res) {
   res.send("Welcome to Home page");
 });
 
+
+
+// dealer get request 
+
+// Route for Get All tire reports from database
+
+app.get('/tires', async (request, response) => {
+  try {
+    const tires = await Tire.find({});
+
+    return response.status(200).json({
+      count: tires.length,
+      data: tires,
+    });
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).send({ message: error.message });
+  }
+});
+
+// Route for Get One tire report from database by id
+app.get('/tires/:id', async (request, response) => {
+try {
+  const { id } = request.params;
+
+  const tire = await Tire.findById(id);
+
+  return response.status(200).json(tire);
+  } catch (error) {
+      console.log(error.message);
+      response.status(500).send({ message: error.message });
+  }
+});
+
+
 app.post("/uploads", upload.single("image"), async (req, res) => {
   // console.log(req)
   console.log("post req recived");
@@ -106,8 +141,6 @@ app.post("/uploads", upload.single("image"), async (req, res) => {
 async function startServer() {
   await loadModel();
   await mongodbload();
-  //   const server = app.listen(8000, () => {
-  //     console.log("Server is listening on port 8000");
   app.listen(8000, () => {
     console.log("Server is listening on port 8000");
   });
